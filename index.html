@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>WebGL Basics</title>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>WebGL Basics</title>
+  </head>
+  <body>
+    <canvas id="draw-target" width="320" height="240"></canvas>
+
+    <script type="vertex" id="vs">
+      #version 300 es
+
+      layout (location=0) in vec4 position;
+      layout (location=1) in vec3 color;
+
+      out vec3 vColor;
+
+      void main() {
+        gl_Position = position;
+        vColor = color;
+      }
+    </script>
+    <script type="fragment" id="fs">
+      #version 300 es
+      precision highp float;
+
+      in vec3 vColor;
+      out vec4 fragColor;
+
+      void main() {
+        fragColor = vec4(vColor, 1.0);
+      }
+    </script>
+    <script src="./script.js"></script>
+  </body>
 </html>
